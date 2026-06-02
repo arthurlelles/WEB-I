@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Monte seu sanduíche:</h3>
+    <form>
+        <input type="checkbox" name="ingrediente" value="0.30"> Alface (R$ 0,30)<br>
+        <input type="checkbox" name="ingrediente" value="0.70"> Presunto (R$ 0,70)<br>
+        <input type="checkbox" name="ingrediente" value="1.00"> Peito de peru (R$ 1,00)<br>
+        <input type="checkbox" name="ingrediente" value="0.50"> Azeitonas (R$ 0,50)<br>
+        <input type="checkbox" name="ingrediente" value="0.50"> Tomate (R$ 0,50)<br>
+        <input type="checkbox" name="ingrediente" value="1.00"> Queijo (R$ 1,00)<br>
+        <input type="checkbox" name="ingrediente" value="0.50"> Ovo (R$ 0,50)<br>
+        <input type="checkbox" name="ingrediente" value="0.30"> Milho (R$ 0,30)<br>
+        <input type="checkbox" name="ingrediente" value="2.00"> Peito de frango (R$ 2,00)<br><br>
+        <button type="button" onclick="calcularPreco()">Calcular Preço Final</button>
+    </form>
+    
+    <p id="resultadoPreco"></p>
+
+    <script>
+        function calcularPreco() {
+            const checkboxes = document.getElementsByName("ingrediente");
+            let total = 4.00;
+            for (let box of checkboxes) {
+                if (box.checked) {
+                    total += parseFloat(box.value);
+                }
+            }
+            
+            document.getElementById("resultadoPreco").innerText = "Preço total: R$ " + total.toFixed(2);
+        }
+    </script>
+</body>
+</html>

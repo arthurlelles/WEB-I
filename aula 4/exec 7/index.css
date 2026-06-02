@@ -1,0 +1,12 @@
+.primeiro {
+    text-decoration: underline;
+}
+
+.segundo {
+    text-indent: 50px;
+    text-decoration: overline;
+}
+
+.terceiro {
+    text-decoration: line-through;
+}

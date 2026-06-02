@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Qual seu grau de escolaridade?</h3>
+    <form>
+        <input type="radio" name="grau" value="Ensino Fundamental"> Ensino Fundamental<br>
+        <input type="radio" name="grau" value="Ensino Médio"> Ensino Médio<br>
+        <input type="radio" name="grau" value="Superior Incompleto"> Superior Incompleto<br>
+        <input type="radio" name="grau" value="Superior Completo"> Superior Completo<br>
+        <input type="radio" name="grau" value="Especialização Incompleto"> Especialização Incompleto<br>
+        <input type="radio" name="grau" value="Especialização Completo"> Especialização Completo<br>
+        <input type="radio" name="grau" value="Mestrado Incompleto"> Mestrado Incompleto<br>
+        <input type="radio" name="grau" value="Mestrado Completo"> Mestrado Completo<br>
+        <input type="radio" name="grau" value="Doutorado Incompleto"> Doutorado Incompleto<br>
+        <input type="radio" name="grau" value="Doutorado Completo"> Doutorado Completo<br><br>
+        <button type="button" onclick="mostrarEscolaridade()">Enviar</button>
+    </form>
+    
+    <p id="resultadoEscolaridade"></p>
+
+    <script>
+        function mostrarEscolaridade() {
+            const opcoes = document.getElementsByName("grau");
+            let selecionado = "Nenhuma opção selecionada";
+
+            for (let radio of opcoes) {
+                if (radio.checked) {
+                    selecionado = radio.value;
+                    break;
+                }
+            }
+            
+            document.getElementById("resultadoEscolaridade").innerText = "Sua escolaridade é: " + selecionado;
+        }
+    </script>
+</body>
+</html>

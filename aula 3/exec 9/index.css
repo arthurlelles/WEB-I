@@ -1,0 +1,25 @@
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+td, th{
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+
+}
+
+th {
+    background-color: blue;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color:cyan;
+}
+
+td:first-child {
+    text-align: left;
+}

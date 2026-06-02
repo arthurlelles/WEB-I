@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="texto" style="color: blue;">Este é o texto do parágrafo.</p>
+
+    <button onclick="mudarVermelho()">Alterar para cor vermelha</button>
+    <button onclick="mudarAzul()">Alterar para cor azul</button>
+
+    <script>
+        function mudarVermelho() {
+            document.getElementById("texto").style.color = "red";
+        }
+
+        function mudarAzul() {
+            document.getElementById("texto").style.color = "blue";
+        }
+    </script>
+</body>
+</html>

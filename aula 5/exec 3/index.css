@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.div-amarela {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 500px;
+    height: 500px;
+    background-color: yellow;
+    z-index: 0;
+}
+.div-1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 150px;
+    height: 140px;
+    background-color: orange;
+    z-index: 1;
+}
+.div-2 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    z-index: 2;
+}
+.div-verde {
+    position: absolute;
+    top: 140px;
+    left: 0px;
+    width: 150px;
+    height: 140px;
+    background-color: green;
+    z-index: 1;
+}

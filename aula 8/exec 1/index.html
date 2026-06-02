@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="nota">Digite sua nota (0 a 100):</label>
+    <input type="number" id="nota" />
+    <button onclick="verificarNota()">Verificar Desempenho</button>
+    
+    <p id="desempenho"></p>
+
+    <script>
+        function verificarNota() {
+            let nota = parseFloat(document.getElementById("nota").value);
+            let mensagem;
+
+            if (nota < 0 || nota > 100) {
+                mensagem = "Por favor, insira uma nota válida entre 0 e 100.";
+            } else {
+
+                if (nota >= 90) {
+                    mensagem = "Excelente";
+                } else if (nota >= 60) {
+                    mensagem = "Bom";
+                } else {
+                    mensagem = "Precisa Melhorar";
+                }
+            }
+            document.getElementById("desempenho").innerText = mensagem;
+        }
+    </script>
+</body>
+</html>

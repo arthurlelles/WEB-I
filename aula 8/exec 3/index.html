@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="nota1" placeholder="Nota 1" /><br><br>
+    <input type="number" id="nota2" placeholder="Nota 2" /><br><br>
+    <input type="number" id="nota3" placeholder="Nota 3" /><br><br>
+    <button onclick="calcularMedia()">Calcular Média</button>
+    
+    <p id="resultadoMedia"></p>
+
+    <script>
+        function calcularMedia() {
+            let n1 = parseFloat(document.getElementById("nota1").value);
+            let n2 = parseFloat(document.getElementById("nota2").value);
+            let n3 = parseFloat(document.getElementById("nota3").value);
+            
+            let media = (n1 + n2 + n3) / 3;
+            
+            document.getElementById("resultadoMedia").innerText = "A média é: " + media.toFixed(2);
+        }
+    </script>
+</body>
+</html>

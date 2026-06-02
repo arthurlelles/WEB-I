@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="p1">Este é o primeiro parágrafo.</p>
+    <p id="p2">Este é o segundo parágrafo.</p>
+    <p id="p3">Este é o terceiro parágrafo.</p>
+
+    <button onclick="ocultarTodos()">Ocultar Todos</button>
+    <button onclick="exibirTodos()">Exibir Todos</button>
+
+    <script>
+        function ocultarTodos() {
+            document.getElementById("p1").style.display = "none";
+            document.getElementById("p2").style.display = "none";
+            document.getElementById("p3").style.display = "none";
+        }
+
+        function exibirTodos() {
+            document.getElementById("p1").style.display = "block";
+            document.getElementById("p2").style.display = "block";
+            document.getElementById("p3").style.display = "block";
+        }
+    </script>
+</body>
+</html>

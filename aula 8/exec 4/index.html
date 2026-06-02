@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="salario">Salário Bruto (R$):</label>
+    <input type="number" id="salario" />
+    <button onclick="calcularImposto()">Ver Alíquota</button>
+    
+    <p id="resultadoIR"></p>
+
+    <script>
+        function calcularImposto() {
+            let salario = parseFloat(document.getElementById("salario").value);
+            let aliquota = "";
+
+            if (salario < 1903.99) {
+                aliquota = "Isento";
+            } else if (salario >= 1903.99 && salario < 2826.66) {
+                aliquota = "7,5% do salário bruto";
+            } else if (salario >= 2826.66 && salario < 3751.06) {
+                aliquota = "15% do salário bruto";
+            } else if (salario >= 3751.06 && salario < 4664.69) {
+                aliquota = "22,5% do salário bruto";
+            } else if (salario >= 4664.69) {
+                aliquota = "27,5% do salário bruto";
+            }
+
+            document.getElementById("resultadoIR").innerText = "Sua alíquota é: " + aliquota;
+        }
+    </script>
+</body>
+</html>
