@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Médias de Peso por Faixa Etária</h3>
+    Quantidade de pessoas: <input type="number" id="qtd">
+
+    <button onclick="gerarCampos()">Gerar Campos</button>
+
+    <div id="campos"></div>
+
+    <button onclick="calcular()" style="display:none" id="btnCalc">Calcular</button>
+    
+    <p id="resultado"></p>
+    
+    <script>
+        function gerarCampos(){
+            const qtd = parseInt(document.getElementById("qtd").value);
+            let html = "";
+            for(let i=0;i<qtd;i++){
+                html += "Pessoa "+(i+1)+" - Idade: <input type='number' class='idade'> Peso: <input type='number' class='peso'><br>";
+            }
+            document.getElementById("campos").innerHTML = html;
+            document.getElementById("btnCalc").style.display = "inline";
+        }
+
+        function calcular(){
+            const idades = document.getElementsByClassName("idade");
+            const pesos = document.getElementsByClassName("peso");
+            let faixa1=[], faixa2=[], faixa3=[], faixa4=[];
+
+            for(let i=0;i<idades.length;i++){
+                const idade = parseFloat(idades[i].value);
+                const peso = parseFloat(pesos[i].value);
+                if(idade>=1 && idade<=10) faixa1.push(peso);
+                else if(idade>=11 && idade<=20) faixa2.push(peso);
+                else if(idade>=21 && idade<=30) faixa3.push(peso);
+                else faixa4.push(peso);
+        }
+
+        function media(arr){
+            if(arr.length==0) return "N/A";
+                return (arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(2);
+        }
+        
+        document.getElementById("resultado").innerHTML =
+            "1 a 10 anos: " + media(faixa1) + "<br>" +
+            "11 a 20 anos: " + media(faixa2) + "<br>" +
+            "21 a 30 anos: " + media(faixa3) + "<br>" +
+            "Maiores de 30: " + media(faixa4);
+        }
+    </script>
+</body>
+</html>

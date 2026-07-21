@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <p class="dup" style="padding:10px">Parágrafo 1</p>
+    <p class="dup" style="padding:10px">Parágrafo 2</p>
+    <p class="dup" style="padding:10px">Parágrafo 3</p>
+
+    <script>
+        var cores = ["lightcoral", "lightgreen", "lightblue"];
+        $(".dup").each(function(i){
+        $(this).dblclick(function(){
+            $(this).css("background-color", cores[i]);
+        });
+        });
+    </script>
+
+</body>
+</html>

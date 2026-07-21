@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+    <table border="1" id="tabela">
+        <tr><td>A</td><td>B</td><td>C</td><td>D</td></tr>
+        <tr><td>E</td><td>F</td><td>G</td><td>H</td></tr>
+    </table>
+
+    <script>
+        $("#tabela td:nth-child(even)").css("background-color", "green");
+        $("#tabela td:nth-child(odd)").css("background-color", "yellow");
+    </script>
+    
+</body>
+</html>

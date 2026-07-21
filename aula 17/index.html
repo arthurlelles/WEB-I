@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 id="titulo-form">Novo Colaborador</h3>
+    <ul id="erros" style="color:red"></ul>
+
+    <form id="form-colaborador">
+        <input type="hidden" id="id" name="id">
+        <label>Nome completo</label><br>
+        <input type="text" id="nome_completo" name="nome_completo" required><br>
+        <label>Telefone</label><br>
+        <input type="text" id="telefone" name="telefone" required><br>
+        <label>Endereço</label><br>
+        <input type="text" id="endereco" name="endereco" required><br>
+        <label>Anos de experiência</label><br>
+        <input type="number" id="anos_experiencia" name="anos_experiencia" required><br>
+        <label>Salário</label><br>
+        <input type="text" id="salario" name="salario" required><br><br>
+        <button type="submit" id="btn-salvar">Cadastrar</button>
+        <button type="button" id="btn-cancelar" style="display:none">Cancelar edição</button>
+    </form>
+
+    <h3>Colaboradores cadastrados</h3>
+    <table border="1" cellpadding="6">
+        <thead>
+            <tr>
+            <th>Nome</th><th>Telefone</th><th>Endereço</th><th>Experiência</th><th>Salário</th><th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tabela-colaboradores"></tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById("form-colaborador");
+        const tabela = document.getElementById("tabela-colaboradores");
+        const errosEl = document.getElementById("erros");
+        const btnSalvar = document.getElementById("btn-salvar");
+        const btnCancelar = document.getElementById("btn-cancelar");
+        const titulo = document.getElementById("titulo-form");
+
+        async function carregarColaboradores() {
+        const resp = await fetch("index.php?action=list");
+        const dados = await resp.json();
+        tabela.innerHTML = "";
+        dados.forEach(c => {
+            tabela.innerHTML += `
+            <tr>
+                <td>${c.nome_completo}</td>
+                <td>${c.telefone}</td>
+                <td>${c.endereco}</td>
+                <td>${c.anos_experiencia}</td>
+                <td>${Number(c.salario).toFixed(2)}</td>
+                <td>
+                    <button onclick='editar(${JSON.stringify(c)})'>Editar</button>
+                    <button onclick="excluir(${c.id})">Excluir</button>
+                </td>
+            </tr>`;
+        });
+        }
+
+        function editar(c) {
+            document.getElementById("id").value = c.id;
+            document.getElementById("nome_completo").value = c.nome_completo;
+            document.getElementById("telefone").value = c.telefone;
+            document.getElementById("endereco").value = c.endereco;
+            document.getElementById("anos_experiencia").value = c.anos_experiencia;
+            document.getElementById("salario").value = c.salario;
+            titulo.textContent = "Editar Colaborador";
+            btnSalvar.textContent = "Atualizar";
+            btnCancelar.style.display = "inline";
+        }
+
+        function resetarForm() {
+            form.reset();
+            document.getElementById("id").value = "";
+            titulo.textContent = "Novo Colaborador";
+            btnSalvar.textContent = "Cadastrar";
+            btnCancelar.style.display = "none";
+            errosEl.innerHTML = "";
+        }
+
+        btnCancelar.addEventListener("click", resetarForm);
+
+        async function excluir(id) {
+            if (!confirm("Excluir este colaborador?")) return;
+            const fd = new FormData();
+            fd.append("action", "delete");
+            fd.append("id", id);
+            await fetch("index.php", { method: "POST", body: fd });
+            carregarColaboradores();
+        }
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const fd = new FormData(form);
+            fd.append("action", fd.get("id") ? "update" : "create");
+
+            const resp = await fetch("index.php", { method: "POST", body: fd });
+            const resultado = await resp.json();
+
+            errosEl.innerHTML = "";
+            if (!resultado.success) {
+                resultado.erros.forEach(err => {
+                errosEl.innerHTML += `<li>${err}</li>`;
+                });
+                return;
+            }
+
+            resetarForm();
+            carregarColaboradores();
+        });
+
+        carregarColaboradores();
+
+    </script>
+
+</body>
+</html>

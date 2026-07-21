@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    
+    <img id="img" src="https://picsum.photos/id/1030/150" style="border:2px solid transparent">
+
+    <script>
+        $("#img").hover(
+        function(){ $(this).css("border", "2px solid black"); },
+        function(){ $(this).css("border", "2px solid transparent"); }
+        );
+    </script>
+
+</body>
+</html>

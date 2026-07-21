@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Operações Aritméticas</h3>
+        Número 1: <input type="number" id="n1"><br>
+        Número 2: <input type="number" id="n2"><br>
+        Operação:
+    <select id="op">
+
+    <option value="+">Soma</option>
+    <option value="-">Subtração</option>
+    <option value="*">Multiplicação</option>
+    <option value="/">Divisão</option>
+    </select><br>
+
+    <button onclick="calcular()">Calcular</button>
+    
+    <p id="resultado"></p>
+    
+    <script>
+        function calcular(){
+            const n1 = parseFloat(document.getElementById("n1").value);
+            const n2 = parseFloat(document.getElementById("n2").value);
+            const op = document.getElementById("op").value;
+            let r;
+            if(op=="+") r = n1+n2;
+                else if(op=="-") r = n1-n2;
+                else if(op=="*") r = n1*n2;
+                else r = n1/n2;
+                document.getElementById("resultado").innerText = "Resultado: " + r;
+        }
+    </script>
+    
+</body>
+</html>

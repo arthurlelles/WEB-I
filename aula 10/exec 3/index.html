@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+  Marca: <input type="text" id="marca"><br>
+  Modelo: <input type="text" id="modelo"><br>
+  Ano: <input type="number" id="ano"><br>
+  <button onclick="criarCarro()">Salvar</button>
+  <p id="resultado"></p>
+
+  <script>
+    function criarCarro(){
+      const carro = {
+        marca: document.getElementById("marca").value,
+        modelo: document.getElementById("modelo").value,
+        ano: document.getElementById("ano").value,
+        detalhes: function(){
+          return "Marca: " + this.marca + " - Modelo: " + this.modelo + " - Ano: " + this.ano;
+        }
+      };
+      document.getElementById("resultado").innerText = carro.detalhes();
+    }
+  </script>
+</body>
+</html>

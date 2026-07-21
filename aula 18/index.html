@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 id="titulo-form">Novo Carro</h3>
+    <ul id="erros" style="color:red"></ul>
+
+    <form id="form-carro">
+        <input type="hidden" id="id" name="id">
+        <label>Marca</label><br>
+        <input type="text" id="marca" name="marca" required><br>
+        <label>Modelo</label><br>
+        <input type="text" id="modelo" name="modelo" required><br>
+        <label>Ano</label><br>
+        <input type="number" id="ano" name="ano" required><br>
+        <label>Cor</label><br>
+        <input type="text" id="cor" name="cor" required><br>
+        <label>Placa</label><br>
+        <input type="text" id="placa" name="placa" required><br>
+        <label>Quilometragem</label><br>
+        <input type="number" id="quilometragem" name="quilometragem" required><br>
+        <label>Valor de venda</label><br>
+        <input type="text" id="valor_venda" name="valor_venda" required><br><br>
+        <button type="submit" id="btn-salvar">Cadastrar</button>
+        <button type="button" id="btn-cancelar" style="display:none">Cancelar edição</button>
+    </form>
+
+    <h3>Carros cadastrados</h3>
+    <table border="1" cellpadding="6">
+        <thead>
+            <tr>
+                <th>Marca</th><th>Modelo</th><th>Ano</th><th>Cor</th><th>Placa</th><th>Km</th><th>Valor</th><th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tabela-carros"></tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById("form-carro");
+        const tabela = document.getElementById("tabela-carros");
+        const errosEl = document.getElementById("erros");
+        const btnSalvar = document.getElementById("btn-salvar");
+        const btnCancelar = document.getElementById("btn-cancelar");
+        const titulo = document.getElementById("titulo-form");
+
+        async function carregarCarros() {
+            const resp = await fetch("index.php?action=list");
+            const dados = await resp.json();
+            tabela.innerHTML = "";
+            dados.forEach(c => {
+                tabela.innerHTML += `
+                <tr>
+                    <td>${c.marca}</td>
+                    <td>${c.modelo}</td>
+                    <td>${c.ano}</td>
+                    <td>${c.cor}</td>
+                    <td>${c.placa}</td>
+                    <td>${c.quilometragem}</td>
+                    <td>${Number(c.valor_venda).toFixed(2)}</td>
+                    <td>
+                    <button onclick='editar(${JSON.stringify(c)})'>Editar</button>
+                    <button onclick="excluir(${c.id})">Excluir</button>
+                    </td>
+                </tr>`;
+            });
+        }
+
+        function editar(c) {
+            document.getElementById("id").value = c.id;
+            document.getElementById("marca").value = c.marca;
+            document.getElementById("modelo").value = c.modelo;
+            document.getElementById("ano").value = c.ano;
+            document.getElementById("cor").value = c.cor;
+            document.getElementById("placa").value = c.placa;
+            document.getElementById("quilometragem").value = c.quilometragem;
+            document.getElementById("valor_venda").value = c.valor_venda;
+            titulo.textContent = "Editar Carro";
+            btnSalvar.textContent = "Atualizar";
+            btnCancelar.style.display = "inline";
+        }
+
+        function resetarForm() {
+            form.reset();
+            document.getElementById("id").value = "";
+            titulo.textContent = "Novo Carro";
+            btnSalvar.textContent = "Cadastrar";
+            btnCancelar.style.display = "none";
+            errosEl.innerHTML = "";
+        }
+
+        btnCancelar.addEventListener("click", resetarForm);
+
+        async function excluir(id) {
+            if (!confirm("Excluir este carro?")) return;
+            const fd = new FormData();
+            fd.append("action", "delete");
+            fd.append("id", id);
+            await fetch("index.php", { method: "POST", body: fd });
+            carregarCarros();
+        }
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const fd = new FormData(form);
+            fd.append("action", fd.get("id") ? "update" : "create");
+
+            const resp = await fetch("index.php", { method: "POST", body: fd });
+            const resultado = await resp.json();
+
+            errosEl.innerHTML = "";
+            if (!resultado.success) {
+                resultado.erros.forEach(err => {
+                errosEl.innerHTML += `<li>${err}</li>`;
+                });
+                return;
+            }
+
+            resetarForm();
+            carregarCarros();
+        });
+
+        carregarCarros();
+    </script>
+</body>
+</html>

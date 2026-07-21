@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+  <h3>Análise de Valores</h3>
+  <input type="number" id="valor" placeholder="Digite um valor">
+  <button onclick="adicionar()">Adicionar</button>
+  <button onclick="calcular()">Calcular</button>
+  <p id="lista"></p>
+  <p id="resultado"></p>
+  
+  <script>
+
+    let valores = [];
+
+    function adicionar(){
+
+      const v = parseFloat(document.getElementById("valor").value);
+      valores.push(v);
+      document.getElementById("lista").innerText = "Valores: " + valores.join(", ");
+      document.getElementById("valor").value = "";
+
+    }
+
+    function calcular(){
+
+      const media = valores.reduce((a,b)=>a+b,0)/valores.length;
+      const positivos = valores.filter(v=>v>0).length;
+      const negativos = valores.filter(v=>v<0).length;
+      const percPos = (positivos/valores.length*100).toFixed(2);
+      const percNeg = (negativos/valores.length*100).toFixed(2);
+
+      document.getElementById("resultado").innerHTML =
+        "Média: " + media.toFixed(2) + "<br>" +
+        "Positivos: " + positivos + "<br>" +
+        "Negativos: " + negativos + "<br>" +
+        "% Positivos: " + percPos + "%<br>" +
+        "% Negativos: " + percNeg + "%";
+    }
+
+  </script>
+</body>
+</html>

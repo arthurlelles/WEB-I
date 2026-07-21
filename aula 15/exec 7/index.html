@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <button id="btnFade">Fade</button>
+    <button id="btnSlide">Slide</button>
+    <button id="btnAnimate">Animate</button>
+    <div id="anim1" style="width:100px;height:100px;background:teal;margin-top:10px">Fade</div>
+    <div id="anim2" style="width:100px;height:100px;background:purple;margin-top:10px">Slide</div>
+    <div id="anim3" style="width:100px;height:100px;background:brown;margin-top:10px">Animate</div>
+
+    <script>
+        $("#btnFade").click(function(){ $("#anim1").fadeToggle(); });
+        $("#btnSlide").click(function(){ $("#anim2").slideToggle(); });
+        $("#btnAnimate").click(function(){ $("#anim3").animate({width: "toggle"}); });
+    </script>
+    
+</body>
+</html>

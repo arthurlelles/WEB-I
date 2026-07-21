@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <button onclick="mostrar()">Mostrar Números</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+
+    function mostrar(){
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+      for(let i=1;i<=10;i++){
+        const li = document.createElement("li");
+        li.innerText = i;
+        lista.appendChild(li);
+      }
+    }
+    
+  </script>
+
+</body>
+</html>

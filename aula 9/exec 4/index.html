@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <h3>Temperaturas</h3>
+  <div id="campos"></div>
+  <button onclick="calcular()">Calcular</button>
+  <p id="resultado"></p>
+
+  <script>
+
+    let html = "";
+      for(let i=0;i<10;i++){
+        html += "Temperatura "+(i+1)+": <input type='number' class='temp' step='0.1'><br>";
+    }
+
+    document.getElementById("campos").innerHTML = html;
+
+    function calcular(){
+
+      const temps = document.getElementsByClassName("temp");
+      let valores = [];
+      for(let i=0;i<temps.length;i++) valores.push(parseFloat(temps[i].value));
+      const menor = Math.min(...valores);
+      const maior = Math.max(...valores);
+      const media = valores.reduce((a,b)=>a+b,0)/valores.length;
+      document.getElementById("resultado").innerHTML =
+        "Menor: " + menor + "<br>Maior: " + maior + "<br>Média: " + media.toFixed(2);
+
+    }
+    
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+  Nome: <input type="text" id="nome"><br>
+  Idade: <input type="number" id="idade"><br>
+  <button onclick="criarPessoa()">Criar</button>
+  <p id="resultado"></p>
+
+  <script>
+
+    class Pessoa {
+      constructor(nome, idade){
+        this.nome = nome;
+        this.idade = idade;
+      }
+      mensagem(){
+        return "Nome: " + this.nome + " - Idade: " + this.idade;
+      }
+    }
+
+    function criarPessoa(){
+      const nome = document.getElementById("nome").value;
+      const idade = document.getElementById("idade").value;
+      const pessoa = new Pessoa(nome, idade);
+      document.getElementById("resultado").innerText = pessoa.mensagem();
+    }
+
+  </script>
+
+</body>
+</html>
